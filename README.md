@@ -393,11 +393,11 @@ all_data.groupby(['MSSubClass'])[['SalePrice']].agg(['mean','median','count'])
 #from ALL YOU NEED IS PCA
 full=all_data.copy()
 def map_values():
-    full["oMSSubClass"] = full.MSSubClass.map({'180':1, 
+    full["oMSSubClass"] = full.MSSubClass.map({'180':1, '150':1,
                                         '30':2, '45':2, 
                                         '190':3, '50':3, '90':3, 
                                         '85':4, '40':4, '160':4, 
-                                        '70':5, '20':5, '75':5, '80':5, '150':5,
+                                        '70':5, '20':5, '75':5, '80':5, 
                                         '120': 6, '60':6})
     
     full["oMSZoning"] = full.MSZoning.map({'C (all)':1, 'RH':2, 'RM':2, 'RL':3, 'FV':4})
@@ -940,10 +940,13 @@ stack_model.fit(a,b)
 result=pd.DataFrame({'id':test_ID, 'SalePrice':pred})
 result.to_csv("submission_4PCA.csv",index=False)
 ```
-# 4. Blending method
+# 4. 混合法
 由於此份題目的主旨為提升Ranking的成績，我們還有另一個方法可以提高名次，雖然不符合一般使用的方法，但可以有效的提升排名！
 
-我們提交此份名次後，獲得了 __0.10802__ 分，超越三個融合成果中成績最高的'[House_Prices_submit.csv: 0.10985](https://www.kaggle.com/agehsbarg/top-10-0-10943-stacking-mice-and-brutal-force)'!!
+我們提交此份名次後，獲得了 __0.10677__ 分，超越三個融合成果中成績最高的'[House_Prices_submit.csv: 0.10985](https://www.kaggle.com/agehsbarg/top-10-0-10943-stacking-mice-and-brutal-force)'!!
+![](https://i.imgur.com/rQQ8qyv.png)
+
+
 
 ```
 from sklearn.linear_model import ElasticNetCV, LassoCV, RidgeCV
